@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-type User struct {
+type Users struct {
 	ID               uint      `json:"id" gorm:"primaryKey"`
 	IDKecamatan      uint      `json:"id_kecamatan" binding:"required"`
 	IDKelurahan      uint      `json:"id_kelurahan" binding:"required"`

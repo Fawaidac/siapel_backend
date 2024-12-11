@@ -32,7 +32,7 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	user := models.User{
+	user := models.Users{
 		IDKecamatan: input.IDKecamatan,
 		IDKelurahan: input.IDKelurahan,
 		Name:        input.Name,
@@ -43,7 +43,7 @@ func Register(c *gin.Context) {
 		Status:      "active",
 	}
 
-	if err := configs.DB.Where("email = ?", input.Email).Or("nik = ?", input.NIK).First(&models.User{}).Error; err == nil {
+	if err := configs.DB.Where("email = ?", input.Email).Or("nik = ?", input.NIK).First(&models.Users{}).Error; err == nil {
 	helpers.ErrorResponse(c, http.StatusConflict, "Email or NIK already registered")
 	return
 	}
@@ -67,7 +67,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	var user models.User
+	var user models.Users
 	if err := configs.DB.Where("email = ?", input.Email).First(&user).Error; err != nil {
 		helpers.ErrorResponse(c, http.StatusUnauthorized, "Invalid email or password")
 		return

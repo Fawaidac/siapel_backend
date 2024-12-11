@@ -8,6 +8,7 @@ import (
 
 func main() {
 	
+	configs.ConnectDatabase()
 	configs.InitializeJWT()
 
 	r := gin.Default()

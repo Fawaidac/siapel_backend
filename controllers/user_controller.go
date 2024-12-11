@@ -12,7 +12,7 @@ import (
 func UserProfile(c *gin.Context) {
 	userID := c.MustGet("user_id").(float64)
 
-	var user models.User
+	var user models.Users
 	if err := configs.DB.First(&user, uint(userID)).Error; err != nil {
 		helpers.ErrorResponse(c, http.StatusNotFound, "User not found")
 		return
