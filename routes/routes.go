@@ -17,6 +17,7 @@ func SetupRoutes(router *gin.Engine) {
 	protected.Use(middlewares.AuthMiddleware())
 	{
 				protected.GET("/profile", controllers.UserProfile)
+				protected.GET("/all", controllers.GetAllUsers)
 				protected.POST("/logout", controllers.Logout)
 	}
 

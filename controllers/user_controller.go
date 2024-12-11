@@ -35,3 +35,12 @@ func UserProfile(c *gin.Context) {
 	})
 }
 
+func GetAllUsers(c *gin.Context){
+	var users []models.Users
+				if err := configs.DB.Find(&users).Error; err != nil {
+        helpers.ErrorResponse(c, http.StatusInternalServerError, "Failed to retrieve users")
+        return
+    }
+
+    helpers.SuccessResponse(c, "Users retrieved successfully", users)
+}
