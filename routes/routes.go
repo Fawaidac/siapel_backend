@@ -9,26 +9,26 @@ import (
 func SetupRoutes(router *gin.Engine) {
 	auth := router.Group("/auth")
 	{
-				auth.POST("/register", controllers.Register)
-				auth.POST("/login", controllers.Login)
+		auth.POST("/register", controllers.Register)
+		auth.POST("/login", controllers.Login)
 	}
 
 	protected := router.Group("/user")
 	protected.Use(middlewares.AuthMiddleware())
 	{
-				protected.GET("/profile", controllers.UserProfile)
-				protected.GET("/", middlewares.PermissionMiddleware("read_user"), controllers.GetAllUsers)
-				protected.POST("/logout", controllers.Logout)
+		protected.GET("/profile", controllers.UserProfile)
+		protected.GET("/", middlewares.PermissionMiddleware("read_user"), controllers.GetAllUsers)
+		protected.POST("/logout", controllers.Logout)
 	}
 
 	subDistrict := router.Group("/sub-districts")
 	subDistrict.Use(middlewares.AuthMiddleware())
 	{
-				subDistrict.POST("/",  middlewares.PermissionMiddleware("create_sub_district"), controllers.CreateSubDistrict)
-				subDistrict.GET("/",  middlewares.PermissionMiddleware("read_sub_district"), controllers.GetAllSubDistricts)
-				subDistrict.GET("/:id",  middlewares.PermissionMiddleware("read_sub_district"), controllers.GetSubDistrictByID)
-				subDistrict.PUT("/:id",  middlewares.PermissionMiddleware("update_sub_district"), controllers.UpdateSubDistrict)
-				subDistrict.DELETE("/:id", middlewares.PermissionMiddleware("delete_sub_district"), controllers.DeleteSubDistrict)
+		subDistrict.POST("/",  middlewares.PermissionMiddleware("create_sub_district"), controllers.CreateSubDistrict)
+		subDistrict.GET("/",  middlewares.PermissionMiddleware("read_sub_district"), controllers.GetAllSubDistricts)
+		subDistrict.GET("/:id",  middlewares.PermissionMiddleware("read_sub_district"), controllers.GetSubDistrictByID)
+		subDistrict.PUT("/:id",  middlewares.PermissionMiddleware("update_sub_district"), controllers.UpdateSubDistrict)
+		subDistrict.DELETE("/:id", middlewares.PermissionMiddleware("delete_sub_district"), controllers.DeleteSubDistrict)
 	}
 
 	villageGroup := router.Group("/villages")
