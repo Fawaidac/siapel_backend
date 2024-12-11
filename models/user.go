@@ -18,4 +18,6 @@ type Users struct {
 	CreatedAt        time.Time `json:"created_at"`
 	UpdatedAt        time.Time `json:"updated_at"`
 }
-
+func (Users) TableName() string {
+    return "users"
+}

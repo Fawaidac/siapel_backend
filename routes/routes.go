@@ -31,7 +31,7 @@ func SetupRoutes(router *gin.Engine) {
 	}
 
 	villageGroup := router.Group("/villages")
-	subDistrict.Use(middlewares.AuthMiddleware())
+	villageGroup.Use(middlewares.AuthMiddleware())
 	{
     villageGroup.POST("/", controllers.CreateVillage)
     villageGroup.GET("/", controllers.GetAllVillages)
@@ -39,6 +39,16 @@ func SetupRoutes(router *gin.Engine) {
     villageGroup.GET("/select/:id_kecamatan", controllers.GetVillagesBySubDistrict)
     villageGroup.PUT("/:id", controllers.UpdateVillage)
     villageGroup.DELETE("/:id", controllers.DeleteVillage)
+	}
+
+	serviceGroup := router.Group("/services")
+	serviceGroup.Use(middlewares.AuthMiddleware())
+	{
+    serviceGroup.POST("/", controllers.CreateService)
+    serviceGroup.GET("/", controllers.GetAllServices)
+    serviceGroup.GET("/:id", controllers.GetServiceByID)
+    serviceGroup.PUT("/:id", controllers.UpdateService)
+    serviceGroup.DELETE("/:id", controllers.DeleteService)
 	}
 	
 }
